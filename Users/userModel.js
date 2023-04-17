@@ -35,10 +35,14 @@ const adminAccountSchema = new mongoose.Schema({
     ],
   });
 
-  export const admin=mongoose.model("admins",adminAccountSchema);
+ const admin=mongoose.model("admins",adminAccountSchema);
 
-  export const teacher=mongoose.model("teachers",teacherAccountSchema)
+ const teacher=mongoose.model("teachers",teacherAccountSchema)
 
-  export const student=mongoose.model('students',studentAccountSchema)
-  
+const student=mongoose.model('students',studentAccountSchema)
+
+module.exports ={
+    admin,teacher,student
+}
+
 
