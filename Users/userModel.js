@@ -30,12 +30,14 @@ const mongoose=require('mongoose')
 
  
 
- const teacher=mongoose.model("accounts",teacherAccountSchema)
+const teacher=mongoose.model("teacher",teacherAccountSchema,'accounts')
 
-const student=mongoose.model('accounts',studentAccountSchema)
+const student=mongoose.model('student',studentAccountSchema,'accounts')
 
 module.exports ={
     teacher,student
 }
+
+
 
 
