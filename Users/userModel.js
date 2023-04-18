@@ -1,17 +1,10 @@
 const mongoose=require('mongoose')
 
-// AdminAccount schema
-const adminAccountSchema = new mongoose.Schema({
-    id: { type: String, required: true },
-    name: { type: String, required: true },
-    lastname: { type: String, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
-  });
   
   // StudentAccount schema
   const studentAccountSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+   
+    userType:{type:String,default:"student"},
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     email: { type: String, required: true },
@@ -23,7 +16,7 @@ const adminAccountSchema = new mongoose.Schema({
   
   // TeacherAccount schema
   const teacherAccountSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    userType:{type:String,default:"teacher"},
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     email: { type: String, required: true },
@@ -35,14 +28,14 @@ const adminAccountSchema = new mongoose.Schema({
     ],
   });
 
- const admin=mongoose.model("admins",adminAccountSchema);
+ 
 
- const teacher=mongoose.model("teachers",teacherAccountSchema)
+ const teacher=mongoose.model("accounts",teacherAccountSchema)
 
-const student=mongoose.model('students',studentAccountSchema)
+const student=mongoose.model('accounts',studentAccountSchema)
 
 module.exports ={
-    admin,teacher,student
+    teacher,student
 }
 
 
