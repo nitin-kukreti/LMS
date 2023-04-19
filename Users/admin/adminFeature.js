@@ -1,8 +1,9 @@
+const Batch = require("../../batch/batch");
 const { student: Student, teacher: Teacher } = require("../userModel");
 
 
 
-const createTeacher = (req, res) => {
+const createTeacher = async(req, res) => {
 
     res.send("request is comming");
 
@@ -10,78 +11,114 @@ const createTeacher = (req, res) => {
 
     try {
 
+        const teacher = new Teacher(req.body);
+        await teacher.save();
+        res.json(201, { msg: 'created ' })
     } catch (err) {
-
+        res.status(500);
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
     }
 }
 
-const createStudent = (req, res) => {
+const createStudent = async(req, res) => {
 
     res.send("request is comming");
 
     console.log(req.body);
 
     try {
-
+        const student = new Student(req.body);
+        await student.save();
+        res.json(201, { msg: 'created ' })
     } catch (err) {
-
+        res.status(500);
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
     }
 }
 
 
-const deleteStudent = (req, res) => {
+const deleteStudent = async(req, res) => {
     res.send("request is comming");
 
     console.log(req.body);
 
     try {
-
+        await Student.deleteOne(req.body);
+        res.json(201, { msg: 'deleted' })
     } catch (err) {
-
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
     }
 
 }
 
 
-const deleteTeacher = (req, res) => {
+const deleteTeacher = async (req, res) => {
     res.send("request is comming");
 
     console.log(req.body);
 
     try {
-
+        await Teacher.deleteOne(req.body);
+        res.json(201, { msg: 'deleted' })
     } catch (err) {
-
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
     }
 }
 
 
-const updateTeacher = (req, res) => {
+const updateTeacher = async(req, res) => {
     res.send("request is comming");
 
     console.log(req.body);
 
     try {
-
+        await Teacher.updateOne({_id:req.body._id},req.body);
+        res.json(201, { msg: 'modified' })
     } catch (err) {
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
 
     }
 }
 
-const updateStudent = (req, res) => {
+const updateStudent = async (req, res) => {
     res.send("request is comming");
 
     console.log(req.body);
 
     try {
-
+        await Student.updateOne({_id:req.body._id},req.body);
+        res.json(201, { msg: 'modified' })
     } catch (err) {
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
 
     }
 }
 
-const createBatch = (req, res) => {
+const createBatch = async (req, res) => {
+
+    try {
+        const batch = new Batch(req.body);
+        await batch.save();
+        res.json(201, { msg: 'created ' })
+    } catch (err) {
+        res.status(500);
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
+    }
+}
+
+
+const updateBatch = async (req, res) => {
     res.send("request is comming");
+
+    console.log(req.body);
+
+    try {
+        await Batch.updateOne({_id:req.body._id},req.body);
+        res.json(201, { msg: 'modified' })
+    } catch (err) {
+        res.json(500, { msg: "Internal Server Error Team is working on it" });
+
+    }
 }
 
 
