@@ -9,9 +9,7 @@ const mongoose=require('mongoose')
     lastname: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    batch: {
-      id: { type: String, required: true,ref:'batch'},
-    },
+    batch: { type:  mongoose.Types.ObjectId, required: true,ref:'batch' },
   });
   
   // TeacherAccount schema
@@ -22,9 +20,9 @@ const mongoose=require('mongoose')
     email: { type: String, required: true },
     password: { type: String, required: true },
     batches: [
-      {
-        id: { type: String, required: true,ref:'batch' },
-      },
+      
+        { type:  mongoose.Types.ObjectId, required: true,ref:'batch' },
+     
     ],
   });
 
