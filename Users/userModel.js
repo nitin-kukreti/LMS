@@ -10,7 +10,7 @@ const mongoose=require('mongoose')
     email: { type: String, required: true },
     password: { type: String, required: true },
     batch: {
-      id: { type: String, required: true },
+      id: { type: String, required: true,ref:'batch'},
     },
   });
   
@@ -23,7 +23,7 @@ const mongoose=require('mongoose')
     password: { type: String, required: true },
     batches: [
       {
-        id: { type: String, required: true },
+        id: { type: String, required: true,ref:'batch' },
       },
     ],
   });
