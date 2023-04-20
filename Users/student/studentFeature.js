@@ -1,4 +1,4 @@
-const { student: Student } = require('../UserModel')
+const { student: Student } = require('../userModel')
 
 
 
