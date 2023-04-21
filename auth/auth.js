@@ -17,7 +17,7 @@ const auth = async (req, res) => {
         }
 
     }else{
-        res.json(404,{msg:"user not found check your name"})
+        res.json(404,{msg:"user not found check your email"})
     }
 
 }
