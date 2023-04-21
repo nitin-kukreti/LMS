@@ -22,6 +22,6 @@ const authenticate = async (req, res) => {
 
 }
 
-module.exports=auth;
+module.exports=authenticate;
 
 
