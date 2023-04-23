@@ -117,7 +117,7 @@ const createLecture = async (req, res) => {
       const docFile = req.files.doc;
       const docName = `${uuidv4()}.${docFile.name.split('.').pop()}`;
 
-      docPath = `./public/courses/${courseId}/lectures/${uuidv4()}/${docName}`;
+      docPath = `./data/courses/${courseId}/${docName}`;
 
       await docFile.mv(docPath);
     }
