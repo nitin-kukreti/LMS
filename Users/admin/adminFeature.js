@@ -123,6 +123,6 @@ const updateBatch = async (req, res) => {
 
 
 module.exports = {
-    createStudent, createTeacher, updateStudent, updateTeacher, createBatch
+    createStudent, createTeacher, updateStudent, updateTeacher, createBatch,deleteStudent,deleteTeacher,updateBatch
 }
 
