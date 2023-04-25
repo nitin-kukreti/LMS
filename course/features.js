@@ -121,14 +121,23 @@ const createLecture = async (req, res) => {
 
       await docFile.mv(docPath);
     }
+    let thumbnailPath=null
+    if (req.files && req.files.thumbnail) {
+      const thumbnail = req.files.thumbnail;
+      // Generate a unique filename for the thumbnail
+      const thumbnailName = uuidv4() + path.extname(thumbnail.name);
+      // Move the thumbnail to the server's file system
 
-
+      await thumbnail.mv(`./public/thumbnail/${thumbnailName}`);
+      thumbnailPath = `./thumbnail/${thumbnailName}`;
+    }
+ 
 
     // Save lecture to course
     const lecture = {
       title: req.body.title,
       description: req.body.description,
-      thumbnail: req.body.thumbnail ? req.body.thumbnail : '',
+      thumbnail: thumbnailPath ? thumbnailPath : '',
       videos: videoPaths.map(({ quality, path }) => ({
         quality: quality,
         path: path,
