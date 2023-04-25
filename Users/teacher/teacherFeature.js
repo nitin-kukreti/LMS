@@ -3,7 +3,7 @@ const { Batch } = require("mongodb");
 const uploadAssignment = async (req, res) => {
      const { batchId, title, description, dueDate } = req.body;
      const teacherId = req.user._id; // Assuming teacher is logged in
-   
+     if(req.user.userType!='teacher') return res.status(404).json({ error: 'you are not authorized' });
      try {
        const batch = await Batch.findById(batchId);
        if (!batch) {
@@ -43,3 +43,7 @@ const uploadAssignment = async (req, res) => {
        res.status(500).json({ error: 'Server error' });
      }
    };
+
+   module.exports={
+    uploadAssignment
+   }
