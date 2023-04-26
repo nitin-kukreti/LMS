@@ -145,10 +145,9 @@ const createLecture = async (req, res) => {
       doc: docPath ? docPath : '',
       order: order,
     };
-    course.lectures.push(lecture);
-    await course.save();
+    await Course.findByIdAndUpdate(courseId,{'$push':{'lectures':lecture}});
 
-    res.status(201).json({ message: 'Lecture created successfully', course });
+    res.status(201).json({ message: 'Lecture created successfully' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
