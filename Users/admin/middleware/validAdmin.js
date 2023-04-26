@@ -11,11 +11,12 @@ const validAdmin = (req, res, next) => {
                     res.json(401, { msg: "incorrect token is provided" })
                     return;
                 }
-                if (authdata.userType !== 'admin') {
+                if (authdata.user.userType !== 'admin') {
                     res.json(401, { msg: "you are not admin" }) 
                     return;
                 }
-                next();
+                console.log("valid admin")
+                return next();
             })
 
         } catch (error) {

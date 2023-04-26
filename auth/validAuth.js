@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const validAuth = (req, res, next) => {
     var tokenheader = req.headers['authorization'];
+    console.log(tokenheader)
     if (tokenheader !== undefined) {
         try {
             var data = tokenheader.split(" ");
@@ -11,7 +12,7 @@ const validAuth = (req, res, next) => {
                     res.json(401, { msg: "incorrect token is provided" })
                     return;
                 }
-                req.user = authdata;
+                req.user = authdata.user;
                 next();
             })
 

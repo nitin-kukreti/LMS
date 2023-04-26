@@ -8,8 +8,8 @@ const batchSchema = mongoose.Schema({
     decription: String,
     courses: [courseSchema],
     assignment: [assignmentSchema],
-    teachers: [string],
-    student: [string]
+    teachers: [{ type: mongoose.Types.ObjectId, required: true, ref: 'teacher' }],
+    student: [{ type: mongoose.Types.ObjectId, required: true, ref: 'student' }]
 
 })
 

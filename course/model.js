@@ -22,8 +22,8 @@ const videoSchema = mongoose.Schema({
   });
 
   const Course=mongoose.model('course',courseSchema);
-  const Video=mongoose.model('video',videoSchema);
+  
   const Lecture=mongoose.model('lecture',lectureSchema);
   module.exports={
-    Course,Video,Lecture,courseSchema
+    Course,Lecture,courseSchema
   }
