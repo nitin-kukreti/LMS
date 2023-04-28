@@ -84,17 +84,17 @@ const createLecture = async (req, res) => {
     await videoFile.mv(videoPath);
 
     // Convert video to different qualities using ffmpeg
-    const videoQualities = [{ quality: '426x240', bitrate: '500k' }, { quality: '640x360', bitrate: '800k' }, { quality: '854x480', bitrate: '1000k' }, { quality: '1280x720', bitrate: '2500k' }, { quality: '1920x1080', bitrate: '5000k' }]
+    const videoQualities = [{ quality: '426x240', bitrate: '500k', q: '240p', b: 500000 }, { quality: '640x360', bitrate: '800k', q: '360p', b: 800000 }, { quality: '854x480', bitrate: '1000k', q: '480p', b: 1000000 }, { quality: '1280x720', bitrate: '2500k', q: '720p', b: 2500000 }, { quality: '1920x1080', bitrate: '5000k', q: '1080p', b: 5000000 }]
     const videoPaths = [];
     const video = ffmpeg(videoPath);
     video.videoCodec('libx264')
       .audioCodec('copy');
-    for (const { quality, bitrate } of videoQualities) {
+    for (const { quality, bitrate, q, b } of videoQualities) {
 
       const outputFileName = `${uuidv4()}.mp4`;
       const outputPath = `./data/courses/${courseId}/${quality}/${outputFileName}`;
       const folder = `./data/courses/${courseId}/${quality}`;
-      videoPaths.push({ quality: quality, path: outputPath })
+      videoPaths.push({ quality: q, path: outputPath, bitrate: b })
       if (!fs.existsSync(folder)) { // check if the folder exists
         fs.mkdirSync(folder, { recursive: true }); // create the folder if it doesn't exist
       }
@@ -121,7 +121,7 @@ const createLecture = async (req, res) => {
 
       await docFile.mv(docPath);
     }
-    let thumbnailPath=null
+    let thumbnailPath = null
     if (req.files && req.files.thumbnail) {
       const thumbnail = req.files.thumbnail;
       // Generate a unique filename for the thumbnail
@@ -131,16 +131,17 @@ const createLecture = async (req, res) => {
       await thumbnail.mv(`./public/thumbnail/${thumbnailName}`);
       thumbnailPath = `./thumbnail/${thumbnailName}`;
     }
- 
+
 
     // Save lecture to course
     const lecture = {
       title: req.body.title,
       description: req.body.description,
       thumbnail: thumbnailPath ? thumbnailPath : '',
-      videos: videoPaths.map(({ quality, path }) => ({
+      videos: videoPaths.map(({ quality, path, bitrate }) => ({
         quality: quality,
         path: path,
+        bitrate: bitrate
       })),
       doc: docPath ? docPath : '',
       order: order,
